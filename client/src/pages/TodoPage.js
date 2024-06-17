@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import TodoList from '../components/TodoList/TodoList';
 
 const TodoPage = () => {
+    const [todos, setTodos] = useState([]);
+
+    useEffect(() => {
+
+    }, []);
     return (
-        <h1>
-            TodoPage
-        </h1>
+
+        <div>
+            <h1> Todo List </h1>
+            <TodoList todos={todos}/>
+        </div>
     );
 }
 
