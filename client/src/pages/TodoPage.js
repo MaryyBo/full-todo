@@ -1,17 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import TodoList from '../components/TodoList/TodoList';
+import { useNavigate } from "react-router-dom";
+import { getTasks } from '../api/taskApi';
 
-const TodoPage = () => {
+const TodoPage = (props) => {
     const [todos, setTodos] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
-
+        if (!props.user) {
+            return navigate('/')
+        }
+        getTasks(props.user._id)
+            .then(result => {
+                setTodos(result.data);
+            })
+            .catch(error => {
+                console.error();
+            })
     }, []);
+
     return (
 
         <div>
             <h1> Todo List </h1>
-            <TodoList todos={todos}/>
+            <TodoList todos={todos} />
         </div>
     );
 }
