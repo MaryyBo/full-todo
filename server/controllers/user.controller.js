@@ -9,7 +9,7 @@ module.exports.registrationUser = async (req, res, next) => {
         const { body, passwordHash } = req;
         const createdUser = await User.create({ ...body, passwordHash });
 
-        const token = await createToken({ userId: foundUser._id, email: foundUser.email });
+        const token = await createToken({ userId: createdUser._id, email: createdUser.email });
 
 
         return res.status(201).send({ data: createdUser, tokens: { token } })
@@ -56,11 +56,11 @@ module.exports.loginUser = async (req, res, next) => {
 
 module.exports.checkToken = async (req, res, next) => {
     try {
-        const { params: { token } } = req;
-        const payload = await verifyToken(token);
+
+        const { tokenPayload: { userId } } = req;
 
         const foundUser = await User.findOne({
-            _id: payload.userId
+            _id: userId
         })
 
         return res.status(200).send({ data: foundUser })

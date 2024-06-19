@@ -1,9 +1,11 @@
 POST http://localhost:5000/api/tasks/
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjZjMWYxODdlOTRlNmUxMmZkMjMyOWEiLCJlbWFpbCI6ImphbmUuZG9lQGdtYWlsLmNvbSIsImlhdCI6MTcxODgwMDgwOCwiZXhwIjoxNzE4ODA0NDA4fQ.fmCYp8JeRIEFXF9BcW2fFTVxDo1sg5ZQkmOQMa3QJwg
+
 
 {
-    "authorId": "666c1e3a2d5f898c2a773263",
-    "body": "Заварити чай",
+    
+    "body": "Помити посуд і зробити чай",
     "createdAt": "2024-06-14",
     "deadLine": "2024-06-14",
     "status": "done"
