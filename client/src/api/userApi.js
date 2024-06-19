@@ -29,3 +29,9 @@ export const loginUser = async (data) => {
     }
     return response.json()
 }
+
+export const authUser = async (token) => {
+   const res = await fetch(`${CONSTANTS.API_BASE}/users/${token}`)
+
+   return res.json()
+}
