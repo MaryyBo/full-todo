@@ -1,24 +1,42 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { unstable_HistoryRouter as HistoryRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
-import './App.css'
-import Dashboard from './components/Dashboard/Dashboard';
+import './App.css';
+import TodoPage from './pages/TodoPage';
+import history from './BrowserHistory';
+import { authUser } from './api/userApi';
 
 
 const App = () => {
 
   const [user, setUser] = useState(null);
 
- 
+  useEffect(() => {
+    if (!user) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        authUser(token)
+          .then(userData => {
+            setUser(userData.data)
+          })
+          .catch(error => {
+            return history.push('/');
+          })
+      } else {
+        return history.push('/');
+      }
+    }
+  }, [])
+
 
   return (
-    <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Home sendUser={setUser}/>}/>
-      <Route path="/tasks/" element={<Dashboard user={user} sendUser={setUser}/>}/>
-    </Routes>
+    <HistoryRouter history={history}>
+      <Routes>
+        <Route path="/" element={<Home sendUser={setUser} />} />
+        <Route path="/tasks/" element={<TodoPage />} />
+      </Routes>
 
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

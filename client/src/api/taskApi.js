@@ -1,4 +1,5 @@
 import CONSTANTS from '../constants'
+import history from '../BrowserHistory';
 
 export const getTasks = async () => {
     const token = localStorage.getItem('token');
@@ -9,17 +10,24 @@ export const getTasks = async () => {
             'Authorization': `Bearer ${token}`
         },
     });
-    
+
     if (response.status === 400) {
         const error = await response.json();
         return Promise.reject(error);
     }
+
+    if (response.status === 403) {
+        const error = await response.json();
+        history.push('/');
+        return Promise.reject(error);
+    }
+
     return response.json(); // json перетворюємо на валідний js об'єкт
 }
 
 
 export const createTask = async (data) => {
-   const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
 
     const response = await fetch(`${CONSTANTS.API_BASE}/tasks`, {
         method: 'POST',
@@ -33,5 +41,12 @@ export const createTask = async (data) => {
         const error = await response.json();
         return Promise.reject(error);
     }
+
+    if (response.status === 403) {
+        const error = await response.json();
+        history.push('/');
+        return Promise.reject(error);
+    }
+
     return response.json()
 }
