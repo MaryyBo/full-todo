@@ -5,9 +5,9 @@ module.exports.checkToken = async (req, res, next) => {
 
         const { headers: { authorization } } = req;
         // console.log(headers);
+        
         const [, token] = authorization.split(' '); //отримуємо ['Bearer', 'eyj...']
-        console.log(token);
-
+        // console.log(token);
         // const { params: { token } } = req;
         const payload = await verifyToken(token);
 
