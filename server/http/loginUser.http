@@ -2,6 +2,6 @@ POST http://localhost:5000/api/users/sign-in
 Content-Type: application/json
 
 {
-    "email": "jane.doe@gmail.com",
+    "email": "john.doe@gmail.com",
     "password": "qwerty123"
 }
