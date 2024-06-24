@@ -7,10 +7,11 @@ module.exports.checkToken = async (req, res, next) => {
         // console.log(headers);
 
         const [, token] = authorization.split(' '); //отримуємо ['Bearer', 'eyj...']
-        // console.log(token);
+        console.log('start token_check', token);
         // const { params: { token } } = req;
         const payload = await verifyAccessToken(token);
 
+        console.log('token_check', payload);
         req.tokenPayload = payload;
         next();
 

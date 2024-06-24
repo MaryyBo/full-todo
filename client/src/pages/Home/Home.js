@@ -37,9 +37,6 @@ const Home = (props) => {
       .then(result => {
         // console.log(result);
         props.sendUser(result.data);
-        // token покласти до localStorage
-        // result.tokens.token
-        localStorage.setItem('token', result.tokens.token)
         navigate('/tasks')
       })
       .catch(err => {

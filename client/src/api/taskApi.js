@@ -1,14 +1,15 @@
 import CONSTANTS from '../constants'
 import history from '../BrowserHistory';
+import { refreshSession } from './userApi';
 
 export const getTasks = async () => {
-    const token = localStorage.getItem('token');
+    const accessToken = localStorage.getItem('accessToken');
 
     const response = await fetch(`${CONSTANTS.API_BASE}/tasks`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${token}`
-        },
+            'Authorization': `Bearer ${accessToken}`
+        }
     });
 
     if (response.status === 400) {
@@ -17,36 +18,43 @@ export const getTasks = async () => {
     }
 
     if (response.status === 403) {
-        const error = await response.json();
-        history.push('/');
-        return Promise.reject(error);
+        // const error = await response.json();
+        // history.push('/');
+        // return Promise.reject(error);
+        await refreshSession();
+        return await getTasks();
     }
 
-    return response.json(); // json перетворюємо на валідний js об'єкт
+    return response.json();
 }
 
-
 export const createTask = async (data) => {
-    const token = localStorage.getItem('token');
+    console.log('create task start');
+
+    const accessToken = localStorage.getItem('accessToken');
 
     const response = await fetch(`${CONSTANTS.API_BASE}/tasks`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify(data)
-    })
+    });
+
+
     if (response.status === 400) {
         const error = await response.json();
         return Promise.reject(error);
     }
 
     if (response.status === 403) {
-        const error = await response.json();
-        history.push('/');
-        return Promise.reject(error);
+        // const error = await response.json();
+        // history.push('/');
+        // return Promise.reject(error);
+        await refreshSession();
+        return await createTask(data);
     }
 
-    return response.json()
+    return response.json();
 }

@@ -13,18 +13,13 @@ const App = () => {
 
   useEffect(() => {
     if (!user) {
-      const token = localStorage.getItem('token');
-      if (token) {
-        authUser(token)
-          .then(userData => {
-            setUser(userData.data)
-          })
-          .catch(error => {
-            return history.push('/');
-          })
-      } else {
-        return history.push('/');
-      }
+      authUser()
+        .then(userData => {
+          setUser(userData.data)
+        })
+        .catch(error => {
+          return history.push('/');
+        })
     }
   }, [])
 
