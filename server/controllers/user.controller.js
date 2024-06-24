@@ -54,6 +54,11 @@ module.exports.loginUser = async (req, res, next) => {
                 email: foundUser.email
             });
 
+            await RefreshToken.create({
+                token: refreshToken,
+                userId: foundUser._id
+            })
+
             return res.status(201).send({ data: foundUser, tokens: { accessToken, refreshToken } })
 
             // return res.status(200).send({ data: foundUser })
