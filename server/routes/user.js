@@ -3,6 +3,9 @@ const UserController = require('../controllers/user.controller');
 const { hashPass } = require('../middlewares/hashPassword');
 const { checkToken } = require('../middlewares/checkToken');
 
+const TokenController = require('../controllers/token_controller');
+
+
 const userRouter = Router();
 
 // POST http://localhost:5000/api/users/sign-up
@@ -16,5 +19,8 @@ userRouter.get('/', checkToken, UserController.checkAuth)
 
 // POST http://localhost:5000/api/users/refresh
 userRouter.post('/refresh', UserController.refreshSession)
+
+
+userRouter.get('/test', TokenController.deleteExpiredRefreshTokens)
 
 module.exports = userRouter;
