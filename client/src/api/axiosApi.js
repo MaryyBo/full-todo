@@ -66,13 +66,13 @@ httpClient.interceptors.response.use((response) => { //response - тут буд�
     return response;
 
 }, async (error) => {
-    if (error.response.this.status === 403 && localStorage.getItem('refreshToken')) {
+    if (error.response.status === 403 && localStorage.getItem('refreshToken')) {
         await refreshUser();
 
         // Повторити запит коли сталася помилка 403
         await httpClient(error.config)
     }
-    if (error.response.this.status === 401) {
+    if (error.response.status === 401) {
         history.push('/')
     }
 
