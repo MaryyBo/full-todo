@@ -32,11 +32,10 @@ const Home = (props) => {
   }
 
   const getData = ({ callback, values }) => { // колбек паттерн
-    // setData(userData);
     callback(values)  //запит на реєстрацію юзера
-      .then(result => {
+      .then(({ data: { data } }) => {
         // console.log(result);
-        props.sendUser(result.data);
+        props.sendUser(data);
         navigate('/tasks')
       })
       .catch(err => {
