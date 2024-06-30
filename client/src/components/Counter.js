@@ -1,18 +1,27 @@
 import React, { useReducer } from 'react'
 import { connect } from 'react-redux'
-import { incrementAction, decrementAction, changeStepAction } from '../actions/actionCreator'
+import { incrementAction, decrementAction, changeStepAction, toggleThemeAction } from '../actions/actionCreator'
 
 
 const Counter = (props) => {
     const onChangeStep = ({ target: { value } }) => {
         props.changeStep(Number(value));
     }
+
+    const toggleTheme = () => {
+        props.toggleTheme();
+    }
+
+
     return (
         <div>
-            <h1>{props.counter}</h1>
-            <input type='number' name='step' value={props.step} onChange={onChangeStep} />
-            <button onClick={props.increment}>+</button>
-            <button onClick={props.decrement}>-</button>
+            <div style={{ backgroundColor: props.themes.isLightMode ? 'white' : 'grey' }}>
+                <h1>{props.counter.counter}</h1>
+                <input type='number' name='step' value={props.counter.step} onChange={onChangeStep} />
+                <button onClick={props.increment}>+</button>
+                <button onClick={props.decrement}>-</button>
+                <button onClick={toggleTheme}>{props.themes.isLightMode ? 'Switch to dark mode' : 'Switch to light mode'}</button>
+            </div>
         </div>
     );
 }
@@ -27,6 +36,7 @@ const mapStateToProps = (state) => {
 //         increment: () => dispatch(incrementAction()),
 //         decrement: () => dispatch(decrementAction()),    
 //         changeStep: (value) => dispatch(changeStepAction(value))
+//         toggleTheme: () => dispatch(toggleThemeAction())
 
 //     }
 // }
@@ -34,7 +44,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     increment: incrementAction,
     decrement: decrementAction,
-    changeStep: changeStepAction
+    changeStep: changeStepAction,
+    toggleTheme: toggleThemeAction
 }
 const WrappedCounter = connect(mapStateToProps, mapDispatchToProps)(Counter);
 
