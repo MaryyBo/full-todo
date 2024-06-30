@@ -1,26 +1,16 @@
 import React, { useReducer } from 'react'
 import { connect } from 'react-redux'
-import { incrementAction, decrementAction } from '../actions/actionCreator'
+import { incrementAction, decrementAction, changeStepAction } from '../actions/actionCreator'
 
 
 const Counter = (props) => {
-
-
-    // const increment = () => {
-    //     props.dispatch(createActionIncrement())
-    // }
-
-
-    // const decrement = () => {
-    //     props.dispatch(createActionDecrement())
-    // }
-
-    console.log(props);
-
-
+    const onChangeStep = ({ target: { value } }) => {
+        props.changeStep(Number(value));
+    }
     return (
         <div>
             <h1>{props.counter}</h1>
+            <input type='number' name='step' value={props.step} onChange={onChangeStep} />
             <button onClick={props.increment}>+</button>
             <button onClick={props.decrement}>-</button>
         </div>
@@ -28,19 +18,23 @@ const Counter = (props) => {
 }
 
 const mapStateToProps = (state) => {
+    // console.log(state);
     return state;
 }
 
 // const mapDispatchToProps = (dispatch) => {
 //     return {
 //         increment: () => dispatch(incrementAction()),
-//         decrement: () => dispatch(decrementAction())
+//         decrement: () => dispatch(decrementAction()),    
+//         changeStep: (value) => dispatch(changeStepAction(value))
+
 //     }
 // }
 
 const mapDispatchToProps = {
     increment: incrementAction,
-    decrement: decrementAction
+    decrement: decrementAction,
+    changeStep: changeStepAction
 }
 const WrappedCounter = connect(mapStateToProps, mapDispatchToProps)(Counter);
 
@@ -67,4 +61,20 @@ function add(x) {
     }
 }
 add(2)(3) // 5
+*/
+
+
+/*
+
+задача: впровадити зміну кроку для лічильника
+
+1. actionType
+
+2. actionCreator
+
+3. actionCreator -> mapDispatchToProps
+
+4. Reducer (як оновити стан, якщо цей екшен прийшов в редьюсер)
+
+5. Написати обробник події зміни інпут
 */
