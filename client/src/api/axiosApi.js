@@ -8,6 +8,15 @@ const httpClient = axios.create({
     baseURL: CONSTANTS.API_BASE
 });
 
+
+
+export const exampleAPI = async (counter) => {
+    const { data } = await axios.post('http://localhost:5000/example/counter', { counter });
+    return data;
+}
+
+
+
 // USER API
 
 export const registerUser = async (userData) => await httpClient.post('/users/sign-up', userData);
@@ -23,13 +32,13 @@ export const refreshUser = async () => {
 
 // TASK API 
 
-export const getTasks = async () => 
+export const getTasks = async () =>
     await httpClient.get('/tasks');
 
-export const createTask = async (taskData) => 
+export const createTask = async (taskData) =>
     await httpClient.post('/tasks', taskData);
 
-export const deleteTask = async (taskId) => 
+export const deleteTask = async (taskId) =>
     await httpClient.delete(`/tasks/${taskId}`);
 
 

@@ -20,3 +20,26 @@ export const changeStepAction = (value) => {
         }
     })
 }
+
+// ЗАПИТИ НА СЕРВЕР
+
+export const requestCounterFetching = (counter) => {
+    return ({
+      type: ACTION_TYPES.REQUEST_COUNTER_FETCHING,
+      payload: counter
+    });
+  }
+  
+  export const requestCounterSuccess = (data) => {
+    return ({
+      type: ACTION_TYPES.REQUEST_COUNTER_SUCCESS,
+      payload: data
+    });
+  }
+  
+  export const requestCounterError = (error) => {
+    return ({
+      type: ACTION_TYPES.REQUEST_COUNTER_ERROR,
+      payload: error
+    });
+  }
