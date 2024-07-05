@@ -1,5 +1,33 @@
 import ACTION_TYPES from './actionTypes'
 
+export const authUserRequest = () => {
+  return {
+    type: ACTION_TYPES.AUTH_USER_REQUEST,
+  }
+}
+
+export const authUserSuccess = (payload) => {
+  return {
+    type: ACTION_TYPES.AUTH_USER_SUCCESS,
+    payload
+  };
+};
+
+
+export const authUserError = (payload) => {
+  return {
+    type: ACTION_TYPES.AUTH_USER_ERROR,
+    payload
+  };
+};
+
+export const logOutRequest = () => {
+  return {
+    type: ACTION_TYPES.LOG_OUT_REQUEST,
+  }
+};
+
+
 export const loginUserRequest = (payload) => {
   return {
     type: ACTION_TYPES.LOGIN_USER_REQUEST,
@@ -11,16 +39,15 @@ export const loginUserSuccess = (payload) => {
   return {
     type: ACTION_TYPES.LOGIN_USER_SUCCESS,
     payload
-  }
+  };
 };
 
 export const loginUserError = (payload) => {
   return {
     type: ACTION_TYPES.LOGIN_USER_ERROR,
     payload
-  }
+  };
 };
-
 export const registerUserRequest = (payload) => {
   return {
     type: ACTION_TYPES.REGISTER_USER_REQUEST,

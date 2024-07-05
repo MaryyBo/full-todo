@@ -22,6 +22,14 @@ export const refreshUser = async () => {
     return data
 }
 
+export const authUser = async () => await httpClient.get('/users');
+
+// РОЗЛОГУВАННЯ
+
+export const logOut = async () => {
+    localStorage.clear(); // метод clear видаляє все з localStorage
+}
+
 // TASK API 
 
 export const getTasks = async () =>
