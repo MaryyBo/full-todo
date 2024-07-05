@@ -1,7 +1,7 @@
 import { takeLatest } from 'redux-saga/effects';
 import ACTION_TYPES from '../actions/actionTypes';
 import { authSaga, loginSaga, logOutSaga, registerSaga } from './AuthSaga';
-import { getTaskSaga, createTaskSaga, deleteTaskSaga } from './TasksSagas';
+import { createTaskSaga, deleteTaskSaga, getTasksSaga } from './TasksSagas';
 
 
 
@@ -14,8 +14,7 @@ function* rootSaga() {
     yield takeLatest(ACTION_TYPES.LOG_OUT_REQUEST, logOutSaga);
 
     // TASKS
-
-    yield takeLatest(ACTION_TYPES.GET_TASKS_REQUEST, getTaskSaga);
+    yield takeLatest(ACTION_TYPES.GET_TASKS_REQUEST, getTasksSaga);
     yield takeLatest(ACTION_TYPES.CREATE_TASK_REQUEST, createTaskSaga);
     yield takeLatest(ACTION_TYPES.DELETE_TASK_REQUEST, deleteTaskSaga);
 }

@@ -80,9 +80,11 @@ httpClient.interceptors.response.use((response) => { //response - тут буд�
 
         // Повторити запит коли сталася помилка 403
         await httpClient(error.config)
-    }
-    if (error.response.status === 401) {
+    } else if (error.response.status === 401) {
+        logOut();
         history.push('/')
+    } else {
+        return Promise.reject(error);
     }
 
     return Promise.reject(error);

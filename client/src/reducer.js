@@ -47,7 +47,8 @@ const reducer = (state = initialState, action) => {
                 return {
                     ...state,
                     user: payload,
-                    isLoading: false
+                    isLoading: false,
+                    error: null
                 }
             }
 
@@ -57,7 +58,8 @@ const reducer = (state = initialState, action) => {
                 return {
                     ...state,
                     tasks: payload,
-                    isLoading: false
+                    isLoading: false,
+                    error: null
                 }
             }
 
@@ -67,7 +69,8 @@ const reducer = (state = initialState, action) => {
                 return {
                     ...state,
                     tasks: [...tasks, newTask],
-                    isLoading: false
+                    isLoading: false,
+                    error: null
                 }
             }
 
@@ -78,7 +81,8 @@ const reducer = (state = initialState, action) => {
                 return {
                     ...state,
                     tasks: filteredTasks,
-                    isLoading: false
+                    isLoading: false,
+                    error: null
                 }
             }
 
